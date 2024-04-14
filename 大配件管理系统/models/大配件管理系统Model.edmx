@@ -1,0 +1,417 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="大配件管理系统Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CarParts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CarID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PartsID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PartsName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ChangeDate" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="Life" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="NextChangeDate" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="EarlyWarningColor" Type="varchar" MaxLength="10" />
+          <Property Name="EarlyWarning" Type="varchar" MaxLength="50" />
+          <Property Name="Remarks" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="EnterRecords">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PartsID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PartsName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Warehouse" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Number" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="UserID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EnterTime" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="PurchasePrice" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="WarehouseLocation" Type="varchar(max)" Nullable="false" />
+          <Property Name="SafetyStockLevel" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Remarks" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="OutRecords">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PartsID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PartsName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Warehouse" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Number" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="UserID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="OutTime" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="WarehouseLocation" Type="varchar(max)" Nullable="false" />
+          <Property Name="Remarks" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="OverhaulInfor">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CarID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PartsID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PartsName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MaintenanceDate" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="MaintenanceType" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="FaultCause" Type="varchar(max)" />
+          <Property Name="MaintenanceOutcome" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="MaintenancePerformedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MaintenanceCost" Type="varchar(max)" Nullable="false" />
+          <Property Name="NextMaintenanceDate" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="Remarks" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="PartsInfor">
+          <Key>
+            <PropertyRef Name="PartsID" />
+          </Key>
+          <Property Name="PartsID" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="PartsName" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Position" Type="varchar(max)" Nullable="false" />
+          <Property Name="Life" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="PartsType" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Manufacturer" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Remarks" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="ReplaceInfor">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CarID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PartsID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PartsName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ReplaceDate" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="ReasonForChange" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Remarks" Type="varchar(max)" />
+          <Property Name="Cost" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NextChangeExpected" Type="char" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserInfor">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Tel" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserAddress" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Position" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Remarks" Type="varchar(max)" />
+          <Property Name="Cipher" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WarehousingRecords">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PartsID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PartsName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Number" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Warehouse" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PurchasePrice" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="WarehouseLocation" Type="varchar(max)" Nullable="false" />
+          <Property Name="SafetyStockLevel" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Remarks" Type="varchar(max)" />
+        </EntityType>
+        <EntityContainer Name="大配件管理系统ModelStoreContainer">
+          <EntitySet Name="CarParts" EntityType="Self.CarParts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EnterRecords" EntityType="Self.EnterRecords" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OutRecords" EntityType="Self.OutRecords" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OverhaulInfor" EntityType="Self.OverhaulInfor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PartsInfor" EntityType="Self.PartsInfor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReplaceInfor" EntityType="Self.ReplaceInfor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserInfor" EntityType="Self.UserInfor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WarehousingRecords" EntityType="Self.WarehousingRecords" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="大配件管理系统Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="大配件管理系统Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CarParts" EntityType="大配件管理系统Model.CarParts" />
+          <EntitySet Name="EnterRecords" EntityType="大配件管理系统Model.EnterRecords" />
+          <EntitySet Name="OutRecords" EntityType="大配件管理系统Model.OutRecords" />
+          <EntitySet Name="OverhaulInfor" EntityType="大配件管理系统Model.OverhaulInfor" />
+          <EntitySet Name="PartsInfor" EntityType="大配件管理系统Model.PartsInfor" />
+          <EntitySet Name="ReplaceInfor" EntityType="大配件管理系统Model.ReplaceInfor" />
+          <EntitySet Name="UserInfor" EntityType="大配件管理系统Model.UserInfor" />
+          <EntitySet Name="WarehousingRecords" EntityType="大配件管理系统Model.WarehousingRecords" />
+        </EntityContainer>
+        <EntityType Name="CarParts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CarID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PartsID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PartsName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ChangeDate" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Life" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="NextChangeDate" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="EarlyWarningColor" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="EarlyWarning" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="EnterRecords">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PartsID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PartsName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Warehouse" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Number" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="UserID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EnterTime" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="PurchasePrice" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="WarehouseLocation" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="SafetyStockLevel" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="OutRecords">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PartsID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PartsName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Warehouse" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Number" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="UserID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OutTime" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="WarehouseLocation" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="OverhaulInfor">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CarID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PartsID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PartsName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MaintenanceDate" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="MaintenanceType" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FaultCause" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="MaintenanceOutcome" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="MaintenancePerformedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MaintenanceCost" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="NextMaintenanceDate" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="PartsInfor">
+          <Key>
+            <PropertyRef Name="PartsID" />
+          </Key>
+          <Property Name="PartsID" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="PartsName" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Position" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Life" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="PartsType" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Manufacturer" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ReplaceInfor">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CarID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PartsID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PartsName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ReplaceDate" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="ReasonForChange" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Cost" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NextChangeExpected" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="UserInfor">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Tel" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserAddress" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Position" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Cipher" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="WarehousingRecords">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PartsID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PartsName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Number" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Warehouse" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PurchasePrice" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="WarehouseLocation" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="SafetyStockLevel" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="大配件管理系统ModelStoreContainer" CdmEntityContainer="大配件管理系统Entities">
+          <EntitySetMapping Name="CarParts">
+            <EntityTypeMapping TypeName="大配件管理系统Model.CarParts">
+              <MappingFragment StoreEntitySet="CarParts">
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="EarlyWarning" ColumnName="EarlyWarning" />
+                <ScalarProperty Name="EarlyWarningColor" ColumnName="EarlyWarningColor" />
+                <ScalarProperty Name="NextChangeDate" ColumnName="NextChangeDate" />
+                <ScalarProperty Name="Life" ColumnName="Life" />
+                <ScalarProperty Name="ChangeDate" ColumnName="ChangeDate" />
+                <ScalarProperty Name="PartsName" ColumnName="PartsName" />
+                <ScalarProperty Name="PartsID" ColumnName="PartsID" />
+                <ScalarProperty Name="CarID" ColumnName="CarID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EnterRecords">
+            <EntityTypeMapping TypeName="大配件管理系统Model.EnterRecords">
+              <MappingFragment StoreEntitySet="EnterRecords">
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="SafetyStockLevel" ColumnName="SafetyStockLevel" />
+                <ScalarProperty Name="WarehouseLocation" ColumnName="WarehouseLocation" />
+                <ScalarProperty Name="PurchasePrice" ColumnName="PurchasePrice" />
+                <ScalarProperty Name="EnterTime" ColumnName="EnterTime" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Warehouse" ColumnName="Warehouse" />
+                <ScalarProperty Name="PartsName" ColumnName="PartsName" />
+                <ScalarProperty Name="PartsID" ColumnName="PartsID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OutRecords">
+            <EntityTypeMapping TypeName="大配件管理系统Model.OutRecords">
+              <MappingFragment StoreEntitySet="OutRecords">
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="WarehouseLocation" ColumnName="WarehouseLocation" />
+                <ScalarProperty Name="OutTime" ColumnName="OutTime" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Warehouse" ColumnName="Warehouse" />
+                <ScalarProperty Name="PartsName" ColumnName="PartsName" />
+                <ScalarProperty Name="PartsID" ColumnName="PartsID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OverhaulInfor">
+            <EntityTypeMapping TypeName="大配件管理系统Model.OverhaulInfor">
+              <MappingFragment StoreEntitySet="OverhaulInfor">
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="NextMaintenanceDate" ColumnName="NextMaintenanceDate" />
+                <ScalarProperty Name="MaintenanceCost" ColumnName="MaintenanceCost" />
+                <ScalarProperty Name="MaintenancePerformedBy" ColumnName="MaintenancePerformedBy" />
+                <ScalarProperty Name="MaintenanceOutcome" ColumnName="MaintenanceOutcome" />
+                <ScalarProperty Name="FaultCause" ColumnName="FaultCause" />
+                <ScalarProperty Name="MaintenanceType" ColumnName="MaintenanceType" />
+                <ScalarProperty Name="MaintenanceDate" ColumnName="MaintenanceDate" />
+                <ScalarProperty Name="PartsName" ColumnName="PartsName" />
+                <ScalarProperty Name="PartsID" ColumnName="PartsID" />
+                <ScalarProperty Name="CarID" ColumnName="CarID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PartsInfor">
+            <EntityTypeMapping TypeName="大配件管理系统Model.PartsInfor">
+              <MappingFragment StoreEntitySet="PartsInfor">
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="Manufacturer" ColumnName="Manufacturer" />
+                <ScalarProperty Name="PartsType" ColumnName="PartsType" />
+                <ScalarProperty Name="Life" ColumnName="Life" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="PartsName" ColumnName="PartsName" />
+                <ScalarProperty Name="PartsID" ColumnName="PartsID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReplaceInfor">
+            <EntityTypeMapping TypeName="大配件管理系统Model.ReplaceInfor">
+              <MappingFragment StoreEntitySet="ReplaceInfor">
+                <ScalarProperty Name="NextChangeExpected" ColumnName="NextChangeExpected" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ReasonForChange" ColumnName="ReasonForChange" />
+                <ScalarProperty Name="ReplaceDate" ColumnName="ReplaceDate" />
+                <ScalarProperty Name="PartsName" ColumnName="PartsName" />
+                <ScalarProperty Name="PartsID" ColumnName="PartsID" />
+                <ScalarProperty Name="CarID" ColumnName="CarID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserInfor">
+            <EntityTypeMapping TypeName="大配件管理系统Model.UserInfor">
+              <MappingFragment StoreEntitySet="UserInfor">
+                <ScalarProperty Name="Cipher" ColumnName="Cipher" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="UserAddress" ColumnName="UserAddress" />
+                <ScalarProperty Name="Tel" ColumnName="Tel" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WarehousingRecords">
+            <EntityTypeMapping TypeName="大配件管理系统Model.WarehousingRecords">
+              <MappingFragment StoreEntitySet="WarehousingRecords">
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="SafetyStockLevel" ColumnName="SafetyStockLevel" />
+                <ScalarProperty Name="WarehouseLocation" ColumnName="WarehouseLocation" />
+                <ScalarProperty Name="PurchasePrice" ColumnName="PurchasePrice" />
+                <ScalarProperty Name="Warehouse" ColumnName="Warehouse" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="PartsName" ColumnName="PartsName" />
+                <ScalarProperty Name="PartsID" ColumnName="PartsID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

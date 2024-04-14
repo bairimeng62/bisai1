@@ -1,0 +1,66 @@
+﻿<mah:MetroWindow  xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" x:Class="大配件管理系统.EditView.PartsInforEdit1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:大配件管理系统.EditView"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen"
+        DataContext="{Binding Source={StaticResource Locator},Path=Edit_PartsInfor}"
+        Title="配件信息修改" Height="450" Width="600" ResizeMode="NoResize">
+    <Grid>
+        <Grid Margin="60 20 60 25">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition />
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="45"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="配件信息修改" FontSize="28" FontWeight="Black" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <StackPanel Grid.Row="1" Orientation="Horizontal">
+                <TextBlock Margin="90 5 10 5" Text="配件编号:" Foreground="Black" FontSize="16" VerticalAlignment="Center"/>
+                <TextBox Width="220" Height="20" Text="{ Binding PartsInfor1.PartsID,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Foreground="Gray"/>
+            </StackPanel>
+            <StackPanel Grid.Row="2" Orientation="Horizontal">
+                <TextBlock Margin="90 5 10 5" Text="配件名称:" Foreground="Black" FontSize="16" VerticalAlignment="Center"/>
+                <TextBox Width="220" Height="20" Text="{ Binding PartsInfor1.PartsName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+            <StackPanel Grid.Row="3" Orientation="Horizontal">
+                <TextBlock Margin="90 5 10 5" Text="配件类型:" Foreground="Black" FontSize="16"  VerticalAlignment="Center"/>
+                <TextBox Width="220" Height="20" Text="{ Binding PartsInfor1.PartsType,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+            <StackPanel Grid.Row="4" Orientation="Horizontal">
+                <TextBlock Margin="90 5 10 5" Text="配件位置:" Foreground="Black" FontSize="16" VerticalAlignment="Center"/>
+                <TextBox Width="220" Height="20" Text="{ Binding PartsInfor1.Position,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+            <StackPanel Grid.Row="5" Orientation="Horizontal">
+                <TextBlock Margin="100 5 23 5" Text="寿  命:" Foreground="Black" FontSize="16"  VerticalAlignment="Center"/>
+                <TextBox Width="220" Height="20" Text="{ Binding PartsInfor1.Life,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+            
+            <StackPanel Grid.Row="6" Orientation="Horizontal">
+                <TextBlock Margin="90 5 10 5" Text="配件厂家:" Foreground="Black" FontSize="16" VerticalAlignment="Center"/>
+                <TextBox Width="220" Height="20" Text="{ Binding PartsInfor1.Manufacturer,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+            <StackPanel Grid.Row="7" Orientation="Horizontal">
+                <TextBlock Margin="100 5 32 5" Text="备注:" Foreground="Black" FontSize="16"   VerticalAlignment="Center"/>
+                <TextBox Width="220" Height="20" Text="{ Binding PartsInfor1.Remarks,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+            <StackPanel Grid.Row="8" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Content="修   改" Command="{Binding EditPartsInforCommand}" 
+                        FontFamily="Fonts/#FontAwesome" 
+                        CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=Window}}" 
+                            Style="{StaticResource EditButtonStyle}"/>
+                <Button Content="取   消"  Margin="40 0 0 0" Command="{Binding EditPartsInforCommand}" 
+                        FontFamily="Fonts/#FontAwesome" 
+                        CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=Window}}" 
+                            Style="{StaticResource EditButtonStyle}"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</mah:MetroWindow>

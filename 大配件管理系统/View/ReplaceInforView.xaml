@@ -1,0 +1,361 @@
+﻿<UserControl x:Class="大配件管理系统.View.ReplaceInforView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:大配件管理系统.View"
+             xmlns:b="http://schemas.microsoft.com/xaml/behaviors" 
+             mc:Ignorable="d"  DataContext="{Binding Source={StaticResource Locator},Path=ReplaceInfor}"
+             d:DesignHeight="450" d:DesignWidth="800">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="更  换  记  录" FontSize="24" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" />
+        <Grid Grid.Row="1" Background="#f3f3f3">
+            <Grid Margin="18 18 40 18" Background="Transparent">
+                <!--输入框 DataGrid-->
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="120"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <!--输入栏( 搜索栏 添加栏)-->
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <!--搜索栏-->
+                    <Grid>
+                        <Border BorderThickness="0 0 0 1" BorderBrush="#B1AFA9" Grid.ColumnSpan="2"/>
+                        <StackPanel HorizontalAlignment="Right"  VerticalAlignment="Bottom" Orientation="Horizontal" Margin="0 0 0 10">
+                            <TextBlock Text="&#xf002;" FontFamily="../Fonts/#FontAwesome" FontSize="16" FontWeight="Black" Foreground="Black" Margin="0 2 10 0" />
+                            <TextBox Style="{StaticResource SearchTextBoxStyleCarID}" Text="{Binding NameSearchContent,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                                <b:Interaction.Triggers>
+                                    <b:EventTrigger EventName="TextChanged">
+                                        <b:InvokeCommandAction Command="{Binding Path=SearchNameCommand}"/>
+                                    </b:EventTrigger>
+                                </b:Interaction.Triggers>
+                            </TextBox>
+                            <TextBox Style="{StaticResource SearchTextBoxStyleID}" Text="{Binding IDSearchContent,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                                <b:Interaction.Triggers>
+                                    <b:EventTrigger EventName="TextChanged">
+                                        <b:InvokeCommandAction Command="{Binding Path=SearchIDCommand}"/>
+                                    </b:EventTrigger>
+                                </b:Interaction.Triggers>
+                            </TextBox>
+                        </StackPanel>
+                    </Grid>
+
+                    <!--添加栏-->
+                    <Grid Grid.Row="1" Margin="20 8" Grid.ColumnSpan="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"/>
+                            <!--第一行-->
+                            <RowDefinition/>
+                            <!--第二行-->
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0">
+                            <!--第一行-->
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="205"/>
+                                <ColumnDefinition Width="205"/>
+                                <ColumnDefinition Width="205"/>
+                                <ColumnDefinition Width="205"/>
+                                <ColumnDefinition Width="310"/>
+                                <ColumnDefinition Width="205"/>
+
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Orientation="Horizontal" Grid.Column="0">
+                                <TextBlock Text="车辆编号:" FontSize="14" VerticalAlignment="Center"/>
+                                <ComboBox  IsEditable="True" IsDropDownOpen="{Binding IsFocused, ElementName=textBoxName, Mode=OneWay}"
+                                           Width="110" Height="10" HorizontalAlignment="Left" Margin="10 0 0 0" MaxDropDownHeight="120"
+                                           ItemsSource="{Binding FilteredCarID}"  SelectedValuePath="CarID" 
+                                           StaysOpenOnEdit="True" ShouldPreserveUserEnteredPrefix="True" 
+                                           GotFocus="ComboBox_GotFocus"
+                                           Text="{Binding ReplaceInfor1.CarID,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                                    <ComboBox.Template>
+                                        <ControlTemplate TargetType="ComboBox">
+                                            <Grid>
+                                                <ToggleButton x:Name="toggleButton" ClickMode="Press" Focusable="False" IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                                <TextBox x:Name="PART_EditableTextBox" Text="{Binding Text, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" PreviewKeyDown="PART_EditableTextBox_PreviewKeyDown"/>
+                                                <Popup x:Name="Popup" AllowsTransparency="True" IsOpen="{TemplateBinding IsDropDownOpen}" Placement="Bottom" PopupAnimation="Slide">
+                                                    <Grid x:Name="DropDown" SnapsToDevicePixels="True" MinWidth="{TemplateBinding ActualWidth}" MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                                        <Border x:Name="DropDownBorder" Background="White"  BorderBrush="Transparent" />
+                                                        <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
+                                                            <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
+                                                        </ScrollViewer>
+                                                    </Grid>
+                                                </Popup>
+                                            </Grid>
+                                        </ControlTemplate>
+                                    </ComboBox.Template>
+                                </ComboBox>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Grid.Column="1">
+                                <TextBlock Text="配件编号:" FontSize="14" VerticalAlignment="Center"/>
+                                <ComboBox  IsEditable="True" IsDropDownOpen="{Binding IsFocused, ElementName=textBoxName, Mode=OneWay}"
+                                           Width="110" Height="10" HorizontalAlignment="Left" Margin="10 0 0 0" MaxDropDownHeight="120"
+                                           ItemsSource="{Binding FilteredPartsID}"  SelectedValuePath="PartsID" 
+                                           StaysOpenOnEdit="True" ShouldPreserveUserEnteredPrefix="True" 
+                                           GotFocus="ComboBox_GotFocus"
+                                           Text="{Binding ReplaceInfor1.PartsID,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                                    <ComboBox.Template>
+                                        <ControlTemplate TargetType="ComboBox">
+                                            <Grid>
+                                                <ToggleButton x:Name="toggleButton" ClickMode="Press" Focusable="False" IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                                <TextBox x:Name="PART_EditableTextBox" Text="{Binding Text, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" PreviewKeyDown="PART_EditableTextBox_PreviewKeyDown"/>
+                                                <Popup x:Name="Popup" AllowsTransparency="True" IsOpen="{TemplateBinding IsDropDownOpen}" Placement="Bottom" PopupAnimation="Slide">
+                                                    <Grid x:Name="DropDown" SnapsToDevicePixels="True" MinWidth="{TemplateBinding ActualWidth}" MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                                        <Border x:Name="DropDownBorder" Background="White"  BorderBrush="Transparent" />
+                                                        <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
+                                                            <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
+                                                        </ScrollViewer>
+                                                    </Grid>
+                                                </Popup>
+                                            </Grid>
+                                        </ControlTemplate>
+                                    </ComboBox.Template>
+                                </ComboBox>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Grid.Column="2">
+                                <TextBlock Text="配件名称:" FontSize="14" VerticalAlignment="Center" />
+                                <ComboBox  IsEditable="True" IsDropDownOpen="{Binding IsFocused, ElementName=textBoxName, Mode=OneWay}"
+                                           Width="110" Height="10" HorizontalAlignment="Left" Margin="10 0 0 0" MaxDropDownHeight="120"
+                                           ItemsSource="{Binding FilteredPartsName}"  SelectedValuePath="PartsName" 
+                                           StaysOpenOnEdit="True" ShouldPreserveUserEnteredPrefix="True" 
+                                           GotFocus="ComboBox_GotFocus"
+                                           Text="{Binding ReplaceInfor1.PartsName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                                    <ComboBox.Template>
+                                        <ControlTemplate TargetType="ComboBox">
+                                            <Grid>
+                                                <ToggleButton x:Name="toggleButton" ClickMode="Press" Focusable="False" IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                                <TextBox x:Name="PART_EditableTextBox" Text="{Binding Text, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" PreviewKeyDown="PART_EditableTextBox_PreviewKeyDown"/>
+                                                <Popup x:Name="Popup" AllowsTransparency="True" IsOpen="{TemplateBinding IsDropDownOpen}" Placement="Bottom" PopupAnimation="Slide">
+                                                    <Grid x:Name="DropDown" SnapsToDevicePixels="True" MinWidth="{TemplateBinding ActualWidth}" MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                                        <Border x:Name="DropDownBorder" Background="White"  BorderBrush="Transparent" />
+                                                        <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
+                                                            <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
+                                                        </ScrollViewer>
+                                                    </Grid>
+                                                </Popup>
+                                            </Grid>
+                                        </ControlTemplate>
+                                    </ComboBox.Template>
+                                </ComboBox>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Grid.Column="3">
+                                <TextBlock Text="更换日期:" FontSize="14" VerticalAlignment="Center"/>
+                                <DatePicker Width="110" Height="10" HorizontalAlignment="Left" Margin="10 0 0 0" PreviewKeyDown="DatePicker_PreviewKeyDown"
+                                            Text="{Binding ReplaceInfor1.ReplaceDate,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Grid.Column="4">
+                                <TextBlock Text="更换原因:" FontSize="14" VerticalAlignment="Center"/>
+                                <TextBox  Width="220" Height="10" HorizontalAlignment="Left" Margin="10 0 0 0" 
+                                          Text="{Binding ReplaceInfor1.ReasonForChange,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                            </StackPanel>
+
+
+                        </Grid>
+
+                        <Grid Grid.Row="1">
+                            <!--第二行-->
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="205"/>
+                                <ColumnDefinition Width="191"/>
+                                <ColumnDefinition Width="219"/>
+                                <ColumnDefinition Width="310"/>
+                                <ColumnDefinition Width="90"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Orientation="Horizontal" Grid.Column="0">
+                                <TextBlock Text="更换人员:" FontSize="14" VerticalAlignment="Center"/>
+                                <TextBox  Width="110" Height="10" HorizontalAlignment="Left" Margin="10 0 0 0" Text="{Binding ReplaceInfor1.UserID,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Grid.Column="1">
+                                <TextBlock Text="更换费用:" FontSize="14" VerticalAlignment="Center"/>
+                                <TextBox  Width="110" Height="10" HorizontalAlignment="Left" Margin="10 0 0 0" Text="{Binding ReplaceInfor1.Cost,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Grid.Column="2">
+                                <TextBlock Text="预更换日期:" FontSize="14" VerticalAlignment="Center"/>
+                                <DatePicker Width="110" Height="10" HorizontalAlignment="Left" Margin="10 0 0 0" PreviewKeyDown="DatePicker_PreviewKeyDown"
+                                            Text="{Binding ReplaceInfor1.NextChangeExpected,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Grid.Column="3">
+                                <TextBlock Text="备  注:" FontSize="14" VerticalAlignment="Center"/>
+                                <TextBox  Width="220" Height="10" HorizontalAlignment="Left" Margin="10 0 0 0" Text="{Binding ReplaceInfor1.Remarks,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="4" Orientation="Horizontal">
+                                <Button HorizontalAlignment="Center"  
+                                    Content="添 加"
+                                    Style="{StaticResource CommandButtonStyle}" Command="{Binding InsertCommand}">
+                                </Button>
+                            </StackPanel>
+                            <StackPanel Grid.Column="5" Orientation="Horizontal">
+                                <Button HorizontalAlignment="Center"  
+                                    Content="刷 新"
+                                    Style="{StaticResource CommandButtonStyle}" Command="{Binding ClearTextBoxesCommand}">
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+
+                </Grid>
+
+                <!--WarehousingRecords DataGrid-->
+                <DataGrid Grid.Row="1" ItemsSource="{Binding ReplaceInfor}" AutoGenerateColumns="False"  
+                          Style="{StaticResource DataGridStyle1}" 
+                          RowStyle="{DynamicResource DataGridRowStyle}" 
+                          CellStyle="{DynamicResource DataGridCellStyle}" 
+                          RowHeaderStyle="{DynamicResource DataGridRowHeaderStyle}"
+                          x:Name="WarehousingRecordsDataGrid">
+
+
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="车辆编号"  Width="120">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding CarID}" VerticalAlignment="Center" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="配件编号" IsReadOnly="True" Width="120">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding PartsID}" VerticalAlignment="Center"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="配件名称" IsReadOnly="True" Width="120">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding PartsName}" VerticalAlignment="Center"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="更换日期" IsReadOnly="True" Width="130">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding ReplaceDate}" VerticalAlignment="Center" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="更换原因" IsReadOnly="True" Width="240">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding ReasonForChange}" VerticalAlignment="Center" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        
+
+                        <DataGridTemplateColumn Header="更换人员" IsReadOnly="True" Width="120">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding UserID}" VerticalAlignment="Center"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="更换费用" IsReadOnly="True" Width="120">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Cost}" VerticalAlignment="Center" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="预更换日期" IsReadOnly="True" Width="120">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding NextChangeExpected}" VerticalAlignment="Center" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="备注" IsReadOnly="True" Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Remarks}" VerticalAlignment="Center"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="操作" IsReadOnly="True" Width="50">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <!--修改-->
+                                        <TextBlock Tag="{Binding}" Text="&#xf040;" FontFamily="../Fonts/#FontAwesome"  FontSize="20" >
+                                            <TextBlock.Style>
+                                                <Style TargetType="TextBlock">
+                                                    <Setter Property="Foreground" Value="Black"/>
+                                                    <Style.Triggers>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter Property="Foreground" Value="#328FF2"/>
+                                                            <Setter Property="Cursor" Value="Hand"/>
+                                                        </Trigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBlock.Style>
+                                            
+                                            <b:Interaction.Triggers>
+                                                <b:EventTrigger EventName="MouseUp">
+                                                    <b:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:ReplaceInforView},Path=DataContext.ToggleEditCommand}"
+                                                                           CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=TextBlock},Path=Tag}"/>
+                                                </b:EventTrigger>
+                                            </b:Interaction.Triggers>
+                                        </TextBlock>
+
+                                        <!--删除-->
+                                        <TextBlock  Tag="{Binding}" Text="&#xf1f8;" FontFamily="../Fonts/#FontAwesome" FontSize="20" >
+                                            <TextBlock.Style>
+                                                <Style TargetType="TextBlock">
+                                                    <Setter Property="Margin" Value="7 0 0 0"/>
+                                                    <Setter Property="Foreground" Value="Black"/>
+
+                                                    <Style.Triggers>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter Property="Foreground" Value="#328FF2"/>
+                                                            <Setter Property="Cursor" Value="Hand"/>
+                                                        </Trigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBlock.Style>
+                                            
+                                            <b:Interaction.Triggers>
+                                                <b:EventTrigger EventName="MouseUp">
+                                                   <b:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:ReplaceInforView},Path=DataContext.DelectCommand}"
+                                                                           CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=TextBlock},Path=Tag}"/>
+                                                </b:EventTrigger>
+                                            </b:Interaction.Triggers>
+                                        </TextBlock>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

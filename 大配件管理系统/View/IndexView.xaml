@@ -1,0 +1,71 @@
+﻿<UserControl x:Class="大配件管理系统.View.IndexView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:大配件管理系统.View" xmlns:wpf="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             mc:Ignorable="d"  DataContext="{Binding Source={StaticResource Locator},Path=Index}"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Border BorderThickness="0 0 0 1" BorderBrush="#9A9A97">
+            <TextBlock Text="统  计  报  表" FontSize="24" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Border>
+
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <!--库存柱状图-->
+            <wpf:CartesianChart  Grid.Row="0" Grid.Column="0" Margin="15">
+                <wpf:CartesianChart.Series>
+                    <wpf:ColumnSeries Values="{Binding WarehousingValues}"/>
+                </wpf:CartesianChart.Series>
+
+                <wpf:CartesianChart.AxisX>
+                    <wpf:Axis ShowLabels="True" Labels="{Binding WarehousingLabels}">
+                        <wpf:Axis.Separator>
+                            <wpf:Separator Step="1" IsEnabled="False"/>
+                        </wpf:Axis.Separator>
+                    </wpf:Axis>
+                </wpf:CartesianChart.AxisX>
+            </wpf:CartesianChart>
+
+            
+            <!--库存饼状图-->
+            <wpf:PieChart Grid.Row="0" Grid.Column="1" LegendLocation="Right" Hoverable="True" InnerRadius="50" Series="{Binding PieSeries}" Margin="15">
+                <wpf:PieChart.ChartLegend>
+                    <wpf:DefaultLegend Foreground="White"/>
+                </wpf:PieChart.ChartLegend>
+            </wpf:PieChart>
+
+
+            <!--入库折线图-->
+            <wpf:CartesianChart  Grid.Row="1" Grid.Column="0" LegendLocation="Right" Hoverable="True"  Margin="15" Series="{Binding LineSeries}" AxisX="{Binding LineAxiesX}" >
+                <wpf:CartesianChart.ChartLegend>
+                    <wpf:DefaultLegend Foreground="White"/>
+                </wpf:CartesianChart.ChartLegend>
+            </wpf:CartesianChart>
+
+            
+            <!--出库折线图-->
+            <wpf:CartesianChart  Grid.Row="1" Grid.Column="1" LegendLocation="Right" Hoverable="True"  Margin="15" Series="{Binding LineSeries1}" AxisX="{Binding LineAxiesX1}" >
+                <wpf:CartesianChart.ChartLegend>
+                    <wpf:DefaultLegend Foreground="White"/>
+                </wpf:CartesianChart.ChartLegend>
+            </wpf:CartesianChart>
+
+        </Grid>
+
+    </Grid>
+</UserControl>
